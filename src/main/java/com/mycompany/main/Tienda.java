@@ -64,10 +64,8 @@ public class Tienda {
                 case 1 ->
                     agregarAlimento();
 
-
-                case 2 -> 
+                case 2 ->
                     listarAlimentos();
-                
 
                 case 3 -> {
                 }
@@ -86,7 +84,7 @@ public class Tienda {
     public void agregarAlimento() {
         String nombre = JOptionPane.showInputDialog(this, "--Ingresa el nombre del alimento--").trim();
         if (nombre == null) {
-             JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
+            JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
             return;
         }
 
@@ -96,13 +94,13 @@ public class Tienda {
         }
         double precio = Double.parseDouble(precioInput);
         if (precio <= 0) {
-             JOptionPane.showMessageDialog(null, "--El valor debe ser mayor a 0--");
+            JOptionPane.showMessageDialog(null, "--El valor debe ser mayor a 0--");
             return;
         }
 
         String fechaVencido = JOptionPane.showInputDialog(this, "--Ingresa la fecha de vencimiento--").trim();
         if (fechaVencido == null) {
-             JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
+            JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
             return;
         }
 
@@ -112,19 +110,23 @@ public class Tienda {
         }
         int stock = Integer.parseInt(cantidadInput);
         if (stock <= 0) {
-             JOptionPane.showMessageDialog(null, "--El valor debe ser mayor a 0--");
+            JOptionPane.showMessageDialog(null, "--El valor debe ser mayor a 0--");
             return;
         }
 
+        // instanciamos un alimento y le pasamos los aprametros que recibe 
         Alimento alimento = new Alimento(fechaVencido, nombre, precio, stock);
+        // agregamos un nuevo alimento a la lita de alimentos 
 
         alimentos.add(alimento);
 
         JOptionPane.showMessageDialog(null, "--Producto agregado con exito--");
 
     }
-    
+
     public void listarAlimentos() {
+
+        // validar que los campos no entren vacios 
         if (alimentos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "--Debe agregar productos --");
 
@@ -132,8 +134,10 @@ public class Tienda {
 
         }
 
+        // creamos este string para concatenar objetos y cadenas de texto
         StringBuilder lista = new StringBuilder("Lista de Alimentos:\n");
 
+        // recorremos la lista y se imprime los datos de todo el alimento,el appen es para insertar texto 
         alimentos.forEach((alimento) -> {
             lista.append(alimento.getDescription()).append("\n");
 
