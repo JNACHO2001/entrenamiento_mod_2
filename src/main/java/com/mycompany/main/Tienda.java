@@ -1,8 +1,11 @@
 package com.mycompany.main;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Tienda {
+    
+    ArrayList<Producto> productos =new  ArrayList();
 
     // creamos un  metodo para iniciar cuando estemos en main 
     public void iniciar() {
@@ -76,6 +79,11 @@ public class Tienda {
 
         } while (opcion != 5);
 
+    }
+    
+    public void agregarAlimento(){
+    
+    
     }
     
     
