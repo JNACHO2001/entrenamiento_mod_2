@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 public class Tienda {
 
-    ArrayList<Producto> productos = new ArrayList();
+    ArrayList<Producto> alimentos = new ArrayList();
 
     // creamos un  metodo para iniciar cuando estemos en main 
     public void iniciar() {
@@ -65,8 +65,9 @@ public class Tienda {
                     agregarAlimento();
 
 
-                case 2 -> {
-                }
+                case 2 -> 
+                    listarAlimentos();
+                
 
                 case 3 -> {
                 }
@@ -117,9 +118,28 @@ public class Tienda {
 
         Alimento alimento = new Alimento(fechaVencido, nombre, precio, stock);
 
-        productos.add(alimento);
+        alimentos.add(alimento);
 
         JOptionPane.showMessageDialog(null, "--Producto agregado con exito--");
+
+    }
+    
+    public void listarAlimentos() {
+        if (alimentos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "--Debe agregar productos --");
+
+            return;
+
+        }
+
+        StringBuilder lista = new StringBuilder("Lista de Alimentos:\n");
+
+        alimentos.forEach((alimento) -> {
+            lista.append(alimento.getDescription()).append("\n");
+
+        });
+
+        JOptionPane.showMessageDialog(null, lista);
 
     }
 
