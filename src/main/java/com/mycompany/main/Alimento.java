@@ -4,8 +4,8 @@ public class Alimento extends Producto {
 
     private String fechaVencido;
 
-    public Alimento(String nombre, Double precio, String fechaVencido) {
-        super(nombre, precio);
+    public Alimento(String fechaVencido, String nombre, Double precio, int stock) {
+        super(nombre, precio, stock);
         this.fechaVencido = fechaVencido;
     }
 
@@ -19,6 +19,6 @@ public class Alimento extends Producto {
 
     @Override
     protected String getDescription() {
-        return "Alimento: " + getNombre() + " - Precio: $" + getPrecio() + " - Vence: " + fechaVencido;
+        return "Alimento: " + getNombre() + " - Precio: $" + getPrecio() +" - Stock: "+ getStock() + " - Vence: " + fechaVencido;
     }
 }
