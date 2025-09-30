@@ -15,21 +15,41 @@ public class Tienda {
                     3. Salir
                     """;
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-            
+
             switch (opcion) {
                 case 1:
                     
-                    
-                    
+                    break;
+
                 case 2:
-                    
-                    
+
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null,"opcion invalida");
+                    JOptionPane.showMessageDialog(null, "opcion invalida");
             }
 
         } while (opcion != 3);
+
+    }
+
+    public void menuAlimentos() {
+        int opcion;
+        do {
+            String menu = """
+                         ---- Menu Alimentos---
+                         1. Agregar 
+                         2. Listar
+                         3. Editar 
+                         4. Eliminar
+                         5. Volver
+                         """;
+
+            opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+            
+            
+            
+
+        } while (opcion != 5);
 
     }
 
