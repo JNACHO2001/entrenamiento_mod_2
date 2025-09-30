@@ -10,29 +10,36 @@ public class Tienda {
     // creamos un  metodo para iniciar cuando estemos en main 
     public void iniciar() {
         int opcion;
-        do {
 
-            String menu = """
+        try {
+
+            do {
+
+                String menu = """
                     ===MENU PRINCIPAL===
                     1. Gestionar Alimentos
                     2. Gestionar Electrodomésticos
                     3. Salir
                     """;
-            opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 
-            // llamamos a cada logica para implementarlas  
-            switch (opcion) {
-                case 1 ->
-                    logicaAlimentos();
+                // llamamos a cada logica para implementarlas  
+                switch (opcion) {
+                    case 1 ->
+                        logicaAlimentos();
 
-                case 2 ->
-                    menu();
+                    case 2 ->
+                        menu();
 
-                default ->
-                    JOptionPane.showMessageDialog(null, "opcion invalida");
-            }
+                    default ->
+                        JOptionPane.showMessageDialog(null, "opcion invalida");
+                }
 
-        } while (opcion != 3);
+            } while (opcion != 3);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "SE PRODUJO UN ERROR");
+        }
 
     }
 
@@ -55,29 +62,35 @@ public class Tienda {
     // creamos la logica de alimentos  y traemos el menu 
     public void logicaAlimentos() {
         int opcion;
-        do {
-            menu();
 
-            opcion = Integer.parseInt(JOptionPane.showInputDialog(menu()));
+        try {
+            do {
+                menu();
 
-            switch (opcion) {
-                case 1 ->
-                    agregarAlimento();
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(menu()));
 
-                case 2 ->
-                    listarAlimentos();
+                switch (opcion) {
+                    case 1 ->
+                        agregarAlimento();
 
-                case 3 -> {
+                    case 2 ->
+                        listarAlimentos();
+
+                    case 3 -> {
+                    }
+                    case 4 -> {
+                    }
+                    case 5 -> {
+                    }
+                    default ->
+                        JOptionPane.showMessageDialog(null, "opcion invalida");
                 }
-                case 4 -> {
-                }
-                case 5 -> {
-                }
-                default ->
-                    JOptionPane.showMessageDialog(null, "opcion invalida");
-            }
 
-        } while (opcion != 5);
+            } while (opcion != 5);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "SE PRODUJO UN ERROR");
+        }
 
     }
 
