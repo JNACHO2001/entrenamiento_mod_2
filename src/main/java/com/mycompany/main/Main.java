@@ -3,6 +3,7 @@ package com.mycompany.main;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+      Tienda tienda = new Tienda();
+      tienda.iniciar();
     }
 }
