@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Tienda {
 
+    // creamos un  metodo para iniciar cuando estemos en main 
     public void iniciar() {
         int opcion;
         do {
@@ -17,25 +18,19 @@ public class Tienda {
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 
             switch (opcion) {
-                case 1:
-                    
-                    break;
+                case 1 -> logicaAlimentos();
 
-                case 2:
-
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "opcion invalida");
+                case 2 -> menu();
+                
+                default -> JOptionPane.showMessageDialog(null, "opcion invalida");
             }
 
         } while (opcion != 3);
 
     }
 
-    public void menuAlimentos() {
-        int opcion;
-        do {
-            String menu = """
+    public String menu() {
+        String menu = """
                          ---- Menu Alimentos---
                          1. Agregar 
                          2. Listar
@@ -44,13 +39,21 @@ public class Tienda {
                          5. Volver
                          """;
 
-            opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-            
-            
-            
+        return menu;
+
+    }
+
+    public void logicaAlimentos() {
+        int opcion;
+        do {
+            menu();
+
+            opcion = Integer.parseInt(JOptionPane.showInputDialog(menu()));
 
         } while (opcion != 5);
 
     }
+    
+    
 
 }
