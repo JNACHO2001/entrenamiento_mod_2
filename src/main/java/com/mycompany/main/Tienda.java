@@ -16,7 +16,8 @@ public class Tienda {
                     3. Salir
                     """;
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-
+            
+            // llamamos a cada logica para implementarlas  
             switch (opcion) {
                 case 1 -> logicaAlimentos();
 
@@ -28,6 +29,9 @@ public class Tienda {
         } while (opcion != 3);
 
     }
+    
+    // creamos un menu para no duplicar  codigo
+    // retornamos  el menu para llamar en otro lado el methodo
 
     public String menu() {
         String menu = """
@@ -42,6 +46,8 @@ public class Tienda {
         return menu;
 
     }
+    
+    // creamos la logica de alimentos  y traemos el menu 
 
     public void logicaAlimentos() {
         int opcion;
@@ -49,6 +55,24 @@ public class Tienda {
             menu();
 
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu()));
+           
+            switch (opcion) {
+                case 1 -> {
+                }
+
+                case 2 -> {
+                }
+
+                case 3 -> {
+                }
+                case 4 -> {
+                }
+                case 5 -> {
+                }
+                default -> throw new AssertionError();
+            }
+            
+            
 
         } while (opcion != 5);
 
