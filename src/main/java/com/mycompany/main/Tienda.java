@@ -30,6 +30,11 @@ public class Tienda {
 
                     case 2 ->
                         menu();
+                        
+                        
+                        
+                    case 3->
+                       cerrarPrograma();
 
                     default ->
                         JOptionPane.showMessageDialog(null, "opcion invalida");
@@ -80,8 +85,9 @@ public class Tienda {
                     }
                     case 4 -> {
                     }
-                    case 5 -> {
-                    }
+                    case 5 -> 
+                       salirAlMenu();
+                    
                     default ->
                         JOptionPane.showMessageDialog(null, "opcion invalida");
                 }
@@ -158,6 +164,17 @@ public class Tienda {
 
         JOptionPane.showMessageDialog(null, lista);
 
+    }
+
+    public void salirAlMenu() {
+        JOptionPane.showMessageDialog(null, "volviendo...");
+        return;
+
+    }
+
+    public void cerrarPrograma() {
+        JOptionPane.showMessageDialog(null, "Hasta pronto..");
+        System.exit(0);
     }
 
 }
