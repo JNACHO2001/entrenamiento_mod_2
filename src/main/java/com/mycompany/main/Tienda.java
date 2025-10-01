@@ -138,7 +138,8 @@ public class Tienda {
         // agregamos un nuevo alimento a la lita de alimentos 
 
         alimentos.add(alimento);
-
+        
+        System.out.println(alimentos);
         JOptionPane.showMessageDialog(null, "--Producto agregado con exito--");
 
     }
