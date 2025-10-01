@@ -106,6 +106,12 @@ public class Tienda {
             JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
             return;
         }
+        // llamamos al metodo y le pasamos el parametro nombre 
+        // para que compare con los nombre de los alimentos que ya tiene 
+        if (existeProductoNombre(nombre)) {
+            JOptionPane.showMessageDialog(null, "--El producto ya existe");
+            return;
+        }
 
         String precioInput = JOptionPane.showInputDialog(this, "--Ingresa el precio del alimento--").trim();
         if (precioInput == null) {
@@ -122,7 +128,7 @@ public class Tienda {
             JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
             return;
         }
-
+      
         String cantidadInput = JOptionPane.showInputDialog(this, "--Ingresa la cantidad del producto--").trim();
         if (cantidadInput == null) {
             return;
@@ -177,5 +183,24 @@ public class Tienda {
         JOptionPane.showMessageDialog(null, "Hasta pronto..");
         System.exit(0);
     }
+
+    // validacion si el producto ya esta registrado
+    // creamos un metodo boolean para que no sretorne tru o false 
+    // le pasamos un argumento que recibe 
+    public boolean existeProductoNombre(String nombre) {
+        // recorremos el array de alimentos 
+        for (Producto producto : alimentos) {
+            // si el producto que ingresa el usuario es igual al que esta reccoriendo el array entonces es true
+            if (producto.getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+;
 
 }
