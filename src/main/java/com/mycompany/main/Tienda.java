@@ -30,11 +30,9 @@ public class Tienda {
 
                     case 2 ->
                         menu();
-                        
-                        
-                        
-                    case 3->
-                       cerrarPrograma();
+
+                    case 3 ->
+                        cerrarPrograma();
 
                     default ->
                         JOptionPane.showMessageDialog(null, "opcion invalida");
@@ -128,7 +126,7 @@ public class Tienda {
             JOptionPane.showMessageDialog(null, "--El campo no puede estar vacio--");
             return;
         }
-      
+
         String cantidadInput = JOptionPane.showInputDialog(this, "--Ingresa la cantidad del producto--").trim();
         if (cantidadInput == null) {
             return;
@@ -144,7 +142,7 @@ public class Tienda {
         // agregamos un nuevo alimento a la lita de alimentos 
 
         alimentos.add(alimento);
-        
+
         System.out.println(alimentos);
         JOptionPane.showMessageDialog(null, "--Producto agregado con exito--");
 
@@ -201,71 +199,80 @@ public class Tienda {
         return false;
 
     }
-   public void editarAlimento() {
-    if (alimentos.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "--NO hay alimentos para editar--");
-        return;
-    }
 
-    String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a editar--");
-    boolean encontrado = false;
+    public void editarAlimento() {
+        if (alimentos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "--NO hay alimentos para editar--");
+            return;
+        }
 
-    for (Producto alimento : alimentos) {
-        if (alimento.getNombre().equalsIgnoreCase(nombre)) {
-            encontrado = true;
-            JOptionPane.showMessageDialog(null, "--Producto encontrado: " + nombre);
+        String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a editar--");
+        // creamos una variable de control paracerrar el ciclo
+        boolean encontrado = false;
+// recorremos los alimentos 
+        for (Producto alimento : alimentos) {
+            // validamos que se a al que el usario ingresa 
+            if (alimento.getNombre().equalsIgnoreCase(nombre)) {
+                // cambiamos la variable de control 
+                encontrado = true;
+                JOptionPane.showMessageDialog(null, "--Producto encontrado: " + nombre);
 
-            try {
-                String precioInput = JOptionPane.showInputDialog(this, "--Ingresa el nuevo precio--");
-                String cantidadInput = JOptionPane.showInputDialog(this, "--Ingresa la nueva cantidad--");
+                try {
+                    // pedimos los nuevos precios 
+                    String precioInput = JOptionPane.showInputDialog(this, "--Ingresa el nuevo precio--");
+                    String cantidadInput = JOptionPane.showInputDialog(this, "--Ingresa la nueva cantidad--");
+                    // parseamos todo
+                    double nuevoPrecio = Double.parseDouble(precioInput);
+                    int nuevaCantidad = Integer.parseInt(cantidadInput);
+                    // actualizamos con los sets
+                    alimento.setPrecio(nuevoPrecio);
+                    alimento.setStock(nuevaCantidad);
 
-                double nuevoPrecio = Double.parseDouble(precioInput);
-                int nuevaCantidad = Integer.parseInt(cantidadInput);
+                    JOptionPane.showMessageDialog(null, "--Producto actualizado--");
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "--Error: Debes ingresar números válidos--");
+                }
 
-                alimento.setPrecio(nuevoPrecio);
-                alimento.setStock(nuevaCantidad);
-
-                JOptionPane.showMessageDialog(null, "--Producto actualizado--");
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "--Error: Debes ingresar números válidos--");
+                break; // Salimos del ciclo una vez actualizado
             }
+        }
+        // si no lo encuentra salta aca
 
-            break; // Salimos del ciclo una vez actualizado
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
         }
     }
 
-    if (!encontrado) {
-        JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
-    }
-}
-   
-       public void eliminarAlimento() {
+    public void eliminarAlimento() {
         if (alimentos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "--no hay nada que eliminar");
             return;
 
         }
-        
-            String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a eliminar--");
-            boolean encontrado = false;
 
-        
-           for (int i = 0; i < alimentos.size(); i++) {
-               Producto alimento =alimentos.get(i);
-               
-               if (alimento.getNombre().equalsIgnoreCase(nombre)) {
-                   encontrado =true;
-                   alimentos.remove(i);
-                   JOptionPane.showMessageDialog(null, "--Producto eliminado--");
-                   
-               }
-               break;
-               
-           }
-           if (!encontrado) {
-               JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
-               
-           }
+        String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a eliminar--");
+        // variable de control
+        boolean encontrado = false;
+
+        // rrcorremos todo los espacios  del array
+        for (int i = 0; i < alimentos.size(); i++) {
+            // le decimos que vamos a obtener todo el objeto de el indicr donde nos encontramos
+            Producto alimento = alimentos.get(i);
+            //comparamos 
+            if (alimento.getNombre().equalsIgnoreCase(nombre)) {
+                encontrado = true;
+                // borramos ese indice con su objeto
+                alimentos.remove(i);
+                JOptionPane.showMessageDialog(null, "--Producto eliminado--");
+
+            }
+            break;
+
+        }
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
+
+        }
 
     }
 
