@@ -1,11 +1,15 @@
 package com.mycompany.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Tienda {
+     private static final List<String> categoriasDisponibles = Arrays.asList("Electrónica", "Cocina", "Hogar");
 
     ArrayList<Producto> alimentos = new ArrayList();
+      ArrayList<Producto> electrodomesticos = new ArrayList();
 
     // creamos un  metodo para iniciar cuando estemos en main 
     public void iniciar() {
@@ -29,7 +33,7 @@ public class Tienda {
                         logicaAlimentos();
 
                     case 2 ->
-                        menu();
+                        logicaElectrodomestico();
 
                     case 3 ->
                         cerrarPrograma();
@@ -279,12 +283,81 @@ public class Tienda {
     }
     
     
+    public void logicaElectrodomestico() {
+
+        int opcion;
+        menu();
+
+        do {
+
+            opcion = Integer.parseInt(JOptionPane.showInputDialog(menu()));
+
+            try {
+
+                switch (opcion) {
+                    case 1 -> {
+
+                    }
+
+                    default ->
+                        throw new AssertionError();
+                }
+
+            } catch (Exception e) {
+            }
+
+        } while (opcion != 5);
+
+    }
+    
+    public void agregarElectrodomestico(){
+        
+        String nombre =JOptionPane.showInputDialog("--Ingresa el nombre del electrodomestico--");
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"--el nombre no puede estar vacio--");
+            return;
+            
+        }
+        
+        if (existeProductoElectro(nombre)) {
+             JOptionPane.showMessageDialog(null,"--el producto ya esxiste--");
+             return;
+            
+        }
+         String precioInput =JOptionPane.showInputDialog("--Ingresa el precio--").trim();
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    }
+    
+      public boolean existeProductoElectro(String nombre) {
+        // recorremos el array de alimentos 
+        for (Producto producto : electrodomesticos) {
+            // si el producto que ingresa el usuario es igual al que esta reccoriendo el array entonces es true
+            if (producto.getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+
     
 
 
 public class Main {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final List<String> categoriasDisponibles = Arrays.asList("Electrónica", "Cocina", "Hogar");
+  
+   
 
     public static void main(String[] args) {
         System.out.println("=== Crear Electrodoméstico ===");
