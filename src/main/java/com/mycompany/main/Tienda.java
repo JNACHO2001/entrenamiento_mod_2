@@ -97,6 +97,8 @@ public class Tienda {
         }
 
     }
+    
+    
 
     public void agregarAlimento() {
         String nombre = JOptionPane.showInputDialog(this, "--Ingresa el nombre del alimento--").trim();
@@ -275,5 +277,56 @@ public class Tienda {
         }
 
     }
+    
+    
+    
+
+
+public class Main {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final List<String> categoriasDisponibles = Arrays.asList("Electrónica", "Cocina", "Hogar");
+
+    public static void main(String[] args) {
+        System.out.println("=== Crear Electrodoméstico ===");
+        
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+
+        System.out.print("Precio: ");
+        double precio = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Stock: ");
+        int stock = Integer.parseInt(scanner.nextLine());
+
+        // Mostrar categorías disponibles
+        System.out.println("Categorías disponibles:");
+        for (int i = 0; i < categoriasDisponibles.size(); i++) {
+            System.out.println((i + 1) + ". " + categoriasDisponibles.get(i));
+        }
+
+        // Pedir al usuario que elija una categoría válida
+        String categoriaSeleccionada = null;
+        while (categoriaSeleccionada == null) {
+            System.out.print("Seleccione el número de la categoría: ");
+            try {
+                int opcion = Integer.parseInt(scanner.nextLine());
+                if (opcion >= 1 && opcion <= categoriasDisponibles.size()) {
+                    categoriaSeleccionada = categoriasDisponibles.get(opcion - 1);
+                } else {
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Ingrese un número.");
+            }
+        }
+
+        // Crear el producto con la categoría seleccionada
+        Electrodomestico electro = new Electrodomestico(nombre, precio, stock, categoriaSeleccionada);
+
+        System.out.println("\nProducto creado:");
+        System.out.println(electro);
+    }
+}
+
 
 }
