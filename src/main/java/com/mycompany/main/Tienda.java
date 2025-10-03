@@ -81,13 +81,13 @@ public class Tienda {
                     case 2 ->
                         listarAlimentos();
 
-                    case 3 -> {
-                    }
-                    case 4 -> {
-                    }
-                    case 5 -> 
-                       salirAlMenu();
-                    
+                    case 3 ->
+                        editarAlimento();
+                    case 4 ->
+                        eliminarAlimento();
+                    case 5 ->
+                        salirAlMenu();
+
                     default ->
                         JOptionPane.showMessageDialog(null, "opcion invalida");
                 }
@@ -201,6 +201,72 @@ public class Tienda {
         return false;
 
     }
-;
+   public void editarAlimento() {
+    if (alimentos.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "--NO hay alimentos para editar--");
+        return;
+    }
+
+    String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a editar--");
+    boolean encontrado = false;
+
+    for (Producto alimento : alimentos) {
+        if (alimento.getNombre().equalsIgnoreCase(nombre)) {
+            encontrado = true;
+            JOptionPane.showMessageDialog(null, "--Producto encontrado: " + nombre);
+
+            try {
+                String precioInput = JOptionPane.showInputDialog(this, "--Ingresa el nuevo precio--");
+                String cantidadInput = JOptionPane.showInputDialog(this, "--Ingresa la nueva cantidad--");
+
+                double nuevoPrecio = Double.parseDouble(precioInput);
+                int nuevaCantidad = Integer.parseInt(cantidadInput);
+
+                alimento.setPrecio(nuevoPrecio);
+                alimento.setStock(nuevaCantidad);
+
+                JOptionPane.showMessageDialog(null, "--Producto actualizado--");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "--Error: Debes ingresar números válidos--");
+            }
+
+            break; // Salimos del ciclo una vez actualizado
+        }
+    }
+
+    if (!encontrado) {
+        JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
+    }
+}
+   
+       public void eliminarAlimento() {
+        if (alimentos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "--no hay nada que eliminar");
+            return;
+
+        }
+        
+            String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a eliminar--");
+            boolean encontrado = false;
+
+        
+           for (int i = 0; i < alimentos.size(); i++) {
+               Producto alimento =alimentos.get(i);
+               
+               if (alimento.getNombre().equalsIgnoreCase(nombre)) {
+                   encontrado =true;
+                   alimentos.remove(i);
+                   JOptionPane.showMessageDialog(null, "--Producto eliminado--");
+                   
+               }
+               break;
+               
+           }
+           if (!encontrado) {
+               JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
+               
+           }
+
+    }
 
 }
