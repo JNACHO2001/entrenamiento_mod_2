@@ -2,12 +2,14 @@ package com.mycompany.main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Tienda {
-     private static final List<String> categoriasDisponibles = Arrays.asList("Electrónica", "Cocina", "Hogar");
-
+     private static final String[] categoriasDisponibles = {"Electronica", "Cocina", "Hogar"};
+     
+ HashMap<String, String> categoriasMap= new HashMap();
     ArrayList<Producto> alimentos = new ArrayList();
       ArrayList<Producto> electrodomesticos = new ArrayList();
 
@@ -295,9 +297,9 @@ public class Tienda {
             try {
 
                 switch (opcion) {
-                    case 1 -> {
+                    case 1 -> agregarElectrodomestico();
 
-                    }
+                    
 
                     default ->
                         throw new AssertionError();
@@ -310,33 +312,57 @@ public class Tienda {
 
     }
     
-    public void agregarElectrodomestico(){
-        
-        String nombre =JOptionPane.showInputDialog("--Ingresa el nombre del electrodomestico--");
+    public void agregarElectrodomestico() {
+
+        String nombre = JOptionPane.showInputDialog("--Ingresa el nombre del electrodomestico--");
         if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"--el nombre no puede estar vacio--");
+            JOptionPane.showMessageDialog(null, "--el nombre no puede estar vacio--");
             return;
-            
+
         }
-        
+
         if (existeProductoElectro(nombre)) {
-             JOptionPane.showMessageDialog(null,"--el producto ya esxiste--");
-             return;
-            
+            JOptionPane.showMessageDialog(null, "--el producto ya esxiste--");
+            return;
+
         }
-         String precioInput =JOptionPane.showInputDialog("--Ingresa el precio--").trim();
+        String precioInput = JOptionPane.showInputDialog("--Ingresa el precio--").trim();
+        double precio = Double.parseDouble(precioInput);
+        if (precio <= 0) {
+            JOptionPane.showMessageDialog(null, "-- El precio debe ser valido--");
+            return;
+
+        }
+     
+        String cantidadInput = JOptionPane.showInputDialog("--Ingresa la cantidad--").trim();
+        int cantidad = Integer.parseInt(cantidadInput);
+        if (cantidad <= 0) {
+            JOptionPane.showMessageDialog(null, "-- Ingrese una cantidad  valida --");
+            return;
+
+        }
+        
+        
+        
+       
+         int opcionCategoria =Integer.parseInt(JOptionPane.showInputDialog(null, "-- ingresa la categoria ----"+".  \n"
+                 + " "+ categoriasDisponibles[0] +" \n"+categoriasDisponibles[1] ));
+            
+        
+        
+   
+       
+         
+        
+
         
         
         
         
-        
-        
-        
-    
-    
+
     }
-    
-      public boolean existeProductoElectro(String nombre) {
+
+    public boolean existeProductoElectro(String nombre) {
         // recorremos el array de alimentos 
         for (Producto producto : electrodomesticos) {
             // si el producto que ingresa el usuario es igual al que esta reccoriendo el array entonces es true
@@ -350,56 +376,18 @@ public class Tienda {
         return false;
 
     }
+    
+   
+   
+    
+    
+    
+    
+    
 
 
     
 
-
-public class Main {
-  
-   
-
-    public static void main(String[] args) {
-        System.out.println("=== Crear Electrodoméstico ===");
-        
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-
-        System.out.print("Precio: ");
-        double precio = Double.parseDouble(scanner.nextLine());
-
-        System.out.print("Stock: ");
-        int stock = Integer.parseInt(scanner.nextLine());
-
-        // Mostrar categorías disponibles
-        System.out.println("Categorías disponibles:");
-        for (int i = 0; i < categoriasDisponibles.size(); i++) {
-            System.out.println((i + 1) + ". " + categoriasDisponibles.get(i));
-        }
-
-        // Pedir al usuario que elija una categoría válida
-        String categoriaSeleccionada = null;
-        while (categoriaSeleccionada == null) {
-            System.out.print("Seleccione el número de la categoría: ");
-            try {
-                int opcion = Integer.parseInt(scanner.nextLine());
-                if (opcion >= 1 && opcion <= categoriasDisponibles.size()) {
-                    categoriaSeleccionada = categoriasDisponibles.get(opcion - 1);
-                } else {
-                    System.out.println("Opción inválida. Intente nuevamente.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Ingrese un número.");
-            }
-        }
-
-        // Crear el producto con la categoría seleccionada
-        Electrodomestico electro = new Electrodomestico(nombre, precio, stock, categoriaSeleccionada);
-
-        System.out.println("\nProducto creado:");
-        System.out.println(electro);
-    }
-}
 
 
 }
