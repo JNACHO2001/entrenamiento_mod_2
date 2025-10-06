@@ -1,16 +1,18 @@
 package com.mycompany.main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Tienda {
      private static final String[] categoriasDisponibles = {"Electronica", "Cocina", "Hogar"};
      
- HashMap<String, String> categoriasMap= new HashMap();
-    ArrayList<Producto> alimentos = new ArrayList();
+   List<Categoria> categorias = new ArrayList<>();
+   
+   
+  
+      ArrayList <Producto> alimentos = new ArrayList();
       ArrayList<Producto> electrodomesticos = new ArrayList();
 
     // creamos un  metodo para iniciar cuando estemos en main 
@@ -65,7 +67,7 @@ public class Tienda {
                          """;
 
         return menu;
-
+ 
     }
 
     // creamos la logica de alimentos  y traemos el menu 
@@ -81,17 +83,14 @@ public class Tienda {
                 switch (opcion) {
                     case 1 ->
                         agregarAlimento();
-
                     case 2 ->
                         listarAlimentos();
-
                     case 3 ->
                         editarAlimento();
                     case 4 ->
                         eliminarAlimento();
                     case 5 ->
                         salirAlMenu();
-
                     default ->
                         JOptionPane.showMessageDialog(null, "opcion invalida");
                 }
@@ -333,7 +332,7 @@ public class Tienda {
             return;
 
         }
-     
+
         String cantidadInput = JOptionPane.showInputDialog("--Ingresa la cantidad--").trim();
         int cantidad = Integer.parseInt(cantidadInput);
         if (cantidad <= 0) {
@@ -341,12 +340,41 @@ public class Tienda {
             return;
 
         }
-        
-        
-        
+
+        categorias.add(new Categoria("Hogar"));
+        categorias.add(new Categoria("Electronica"));
+        categorias.add(new Categoria("Juguetes"));
+
+        String opCate = JOptionPane.showInputDialog(null, """
+                                                --Categorias disponibles -- 
+                                               1.""" + categoriasDisponibles[0] + " \n "
+                + "2." + categoriasDisponibles[1] + " \n "
+                + "3. " + categoriasDisponibles[2] + " \n ").trim();
+
+        int opcion = Integer.parseInt(opCate);
+
+        if (opcion == 0) {
+            JOptionPane.showMessageDialog(null, "-- Ingrese una cantidad  valida --");
+
+            return;
+
+        }
+
+        if (opcion >= 1 && opcion <= categorias.size()) {
+            Categoria categoriaSeleccionada = categorias.get(opcion - 1);
+            categoriaSeleccionada.agregarProducto(nombre);
+            return;
+
+        } else {
+            JOptionPane.showMessageDialog(null, "-- Opcion invalida  --");
+
+        }
+
+               
+
+
        
-         int opcionCategoria =Integer.parseInt(JOptionPane.showInputDialog(null, "-- ingresa la categoria ----"+".  \n"
-                 + " "+ categoriasDisponibles[0] +" \n"+categoriasDisponibles[1] ));
+     
             
         
         
