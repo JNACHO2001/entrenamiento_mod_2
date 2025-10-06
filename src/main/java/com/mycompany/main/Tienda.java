@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Tienda {
-     private static final String[] categoriasDisponibles = {"Electronica", "Cocina", "Hogar"};
+     
      
    List<Categoria> categorias = new ArrayList<>();
    
@@ -311,66 +311,89 @@ public class Tienda {
 
     }
     
-    public void agregarElectrodomestico() {
-
-        String nombre = JOptionPane.showInputDialog("--Ingresa el nombre del electrodomestico--");
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "--el nombre no puede estar vacio--");
-            return;
-
-        }
-
-        if (existeProductoElectro(nombre)) {
-            JOptionPane.showMessageDialog(null, "--el producto ya esxiste--");
-            return;
-
-        }
-        String precioInput = JOptionPane.showInputDialog("--Ingresa el precio--").trim();
-        double precio = Double.parseDouble(precioInput);
-        if (precio <= 0) {
-            JOptionPane.showMessageDialog(null, "-- El precio debe ser valido--");
-            return;
-
-        }
-
-        String cantidadInput = JOptionPane.showInputDialog("--Ingresa la cantidad--").trim();
-        int cantidad = Integer.parseInt(cantidadInput);
-        if (cantidad <= 0) {
-            JOptionPane.showMessageDialog(null, "-- Ingrese una cantidad  valida --");
-            return;
-
-        }
-
+public void agregarElectrodomestico() {
+    // Suponiendo que 'categorias' está declarado como atributo de clase
+    if (categorias.isEmpty()) {
         categorias.add(new Categoria("Hogar"));
         categorias.add(new Categoria("Electronica"));
         categorias.add(new Categoria("Juguetes"));
+    }
 
-        String opCate = JOptionPane.showInputDialog(null, """
-                                                --Categorias disponibles -- 
-                                               1.""" + categoriasDisponibles[0] + " \n "
-                + "2." + categoriasDisponibles[1] + " \n "
-                + "3. " + categoriasDisponibles[2] + " \n ").trim();
+    String nombre = JOptionPane.showInputDialog("-- Ingresa el nombre del electrodomestico --");
+    if (nombre == null || nombre.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "-- El nombre no puede estar vacío --");
+        return;
+    }
 
-        int opcion = Integer.parseInt(opCate);
+    if (existeProductoElectro(nombre)) {
+        JOptionPane.showMessageDialog(null, "-- El producto ya existe --");
+        return;
+    }
 
-        if (opcion == 0) {
-            JOptionPane.showMessageDialog(null, "-- Ingrese una cantidad  valida --");
-
+    double precio = 0;
+    try {
+        String precioInput = JOptionPane.showInputDialog("-- Ingresa el precio --").trim();
+        precio = Double.parseDouble(precioInput);
+        if (precio <= 0) {
+            JOptionPane.showMessageDialog(null, "-- El precio debe ser mayor que cero --");
             return;
-
         }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "-- Precio inválido, ingresa un número válido --");
+        return;
+    }
 
-        if (opcion >= 1 && opcion <= categorias.size()) {
-            Categoria categoriaSeleccionada = categorias.get(opcion - 1);
-            categoriaSeleccionada.agregarProducto(nombre);
+    int stock = 0;
+    try {
+        String cantidadInput = JOptionPane.showInputDialog("-- Ingresa la cantidad --").trim();
+        stock = Integer.parseInt(cantidadInput);
+        if (stock <= 0) {
+            JOptionPane.showMessageDialog(null, "-- La cantidad debe ser mayor que cero --");
             return;
-
-        } else {
-            JOptionPane.showMessageDialog(null, "-- Opcion invalida  --");
-
         }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "-- Cantidad inválida, ingresa un número válido --");
+        return;
+    }
 
-               
+    // Mostrar opciones de categoría
+    StringBuilder opciones = new StringBuilder("-- Categorías disponibles --\n");
+    for (int i = 0; i < categorias.size(); i++) {
+        opciones.append((i + 1)).append(". ").append(categorias.get(i).getNombre()).append("\n");
+    }
+
+    String opCate = JOptionPane.showInputDialog(opciones.toString());
+    if (opCate == null || opCate.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "-- No seleccionaste ninguna opción --");
+        return;
+    }
+
+    int opcion = 0;
+    try {
+        opcion = Integer.parseInt(opCate.trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "-- Opción inválida, ingresa un número válido --");
+        return;
+    }
+
+    if (opcion < 1 || opcion > categorias.size()) {
+        JOptionPane.showMessageDialog(null, "-- Opción fuera de rango --");
+        return;
+    }
+    
+  
+
+    Categoria categoriaSeleccionada = categorias.get(opcion - 1);
+    Electrodomestico electro = new Electrodomestico( nombre, precio, stock,categoriaSeleccionada);
+    categoriaSeleccionada.agregarProducto(nombre);
+    electrodomesticos.add(electro);
+    JOptionPane.showMessageDialog(null, "---- Producto agregado ---");
+    System.out.println(categoriaSeleccionada.toString());
+    System.out.println(categoriaSeleccionada.getNombre());
+}
+{
+
+
 
 
        
