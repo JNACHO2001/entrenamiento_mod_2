@@ -6,14 +6,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Tienda {
-     
-     
-   List<Categoria> categorias = new ArrayList<>();
-   
-   
-  
-      ArrayList <Producto> alimentos = new ArrayList();
-      ArrayList<Producto> electrodomesticos = new ArrayList();
+
+    List<Categoria> categorias = new ArrayList<>();
+
+    ArrayList<Producto> alimentos = new ArrayList();
+    ArrayList<Producto> electrodomesticos = new ArrayList();
 
     // creamos un  metodo para iniciar cuando estemos en main 
     public void iniciar() {
@@ -67,7 +64,7 @@ public class Tienda {
                          """;
 
         return menu;
- 
+
     }
 
     // creamos la logica de alimentos  y traemos el menu 
@@ -102,8 +99,6 @@ public class Tienda {
         }
 
     }
-    
-    
 
     public void agregarAlimento() {
         String nombre = JOptionPane.showInputDialog(this, "--Ingresa el nombre del alimento--").trim();
@@ -282,8 +277,7 @@ public class Tienda {
         }
 
     }
-    
-    
+
     public void logicaElectrodomestico() {
 
         int opcion;
@@ -296,9 +290,8 @@ public class Tienda {
             try {
 
                 switch (opcion) {
-                    case 1 -> agregarElectrodomestico();
-
-                    
+                    case 1 ->
+                        agregarElectrodomestico();
 
                     default ->
                         throw new AssertionError();
@@ -310,108 +303,109 @@ public class Tienda {
         } while (opcion != 5);
 
     }
-    
-public void agregarElectrodomestico() {
-    // Suponiendo que 'categorias' está declarado como atributo de clase
-    if (categorias.isEmpty()) {
-        categorias.add(new Categoria("Hogar"));
-        categorias.add(new Categoria("Electronica"));
-        categorias.add(new Categoria("Juguetes"));
-    }
 
-    String nombre = JOptionPane.showInputDialog("-- Ingresa el nombre del electrodomestico --");
-    if (nombre == null || nombre.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(null, "-- El nombre no puede estar vacío --");
-        return;
-    }
+    public void agregarElectrodomestico() {
+        // Suponiendo que 'categorias' está declarado como atributo de clase
+        if (categorias.isEmpty()) {
+            categorias.add(new Categoria("Hogar"));
+            categorias.add(new Categoria("Electronica"));
+            categorias.add(new Categoria("Juguetes"));
+        }
 
-    if (existeProductoElectro(nombre)) {
-        JOptionPane.showMessageDialog(null, "-- El producto ya existe --");
-        return;
-    }
-
-    double precio = 0;
-    try {
-        String precioInput = JOptionPane.showInputDialog("-- Ingresa el precio --").trim();
-        precio = Double.parseDouble(precioInput);
-        if (precio <= 0) {
-            JOptionPane.showMessageDialog(null, "-- El precio debe ser mayor que cero --");
+        String nombre = JOptionPane.showInputDialog("-- Ingresa el nombre del electrodomestico --");
+        if (nombre == null || nombre.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "-- El nombre no puede estar vacío --");
             return;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "-- Precio inválido, ingresa un número válido --");
-        return;
-    }
 
-    int stock = 0;
-    try {
-        String cantidadInput = JOptionPane.showInputDialog("-- Ingresa la cantidad --").trim();
-        stock = Integer.parseInt(cantidadInput);
-        if (stock <= 0) {
-            JOptionPane.showMessageDialog(null, "-- La cantidad debe ser mayor que cero --");
+        if (existeProductoElectro(nombre)) {
+            JOptionPane.showMessageDialog(null, "-- El producto ya existe --");
             return;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "-- Cantidad inválida, ingresa un número válido --");
-        return;
-    }
 
-    // Mostrar opciones de categoría
-    StringBuilder opciones = new StringBuilder("-- Categorías disponibles --\n");
-    for (int i = 0; i < categorias.size(); i++) {
-        opciones.append((i + 1)).append(". ").append(categorias.get(i).getNombre()).append("\n");
-    }
+        double precio = 0;
+        try {
+            String precioInput = JOptionPane.showInputDialog("-- Ingresa el precio --").trim();
+            precio = Double.parseDouble(precioInput);
+            if (precio <= 0) {
+                JOptionPane.showMessageDialog(null, "-- El precio debe ser mayor que cero --");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "-- Precio inválido, ingresa un número válido --");
+            return;
+        }
 
-    String opCate = JOptionPane.showInputDialog(opciones.toString());
-    if (opCate == null || opCate.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(null, "-- No seleccionaste ninguna opción --");
-        return;
-    }
+        int stock = 0;
+        try {
+            String cantidadInput = JOptionPane.showInputDialog("-- Ingresa la cantidad --").trim();
+            stock = Integer.parseInt(cantidadInput);
+            if (stock <= 0) {
+                JOptionPane.showMessageDialog(null, "-- La cantidad debe ser mayor que cero --");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "-- Cantidad inválida, ingresa un número válido --");
+            return;
+        }
 
-    int opcion = 0;
-    try {
-        opcion = Integer.parseInt(opCate.trim());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "-- Opción inválida, ingresa un número válido --");
-        return;
-    }
+        // Mostrar opciones de categoría
+        StringBuilder opciones = new StringBuilder("-- Categorías disponibles --\n");
+        for (int i = 0; i < categorias.size(); i++) {
+            opciones.append((i + 1)).append(". ").append(categorias.get(i).getNombre()).append("\n");
+        }
 
-    if (opcion < 1 || opcion > categorias.size()) {
-        JOptionPane.showMessageDialog(null, "-- Opción fuera de rango --");
-        return;
+        String opCate = JOptionPane.showInputDialog(opciones.toString());
+        if (opCate == null || opCate.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "-- No seleccionaste ninguna opción --");
+            return;
+        }
+
+        int opcion = 0;
+        try {
+            opcion = Integer.parseInt(opCate.trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "-- Opción inválida, ingresa un número válido --");
+            return;
+        }
+
+        if (opcion < 1 || opcion > categorias.size()) {
+            JOptionPane.showMessageDialog(null, "-- Opción fuera de rango --");
+            return;
+        }
+
+        Categoria categoriaSeleccionada = categorias.get(opcion - 1);
+        Electrodomestico electro = new Electrodomestico(nombre, precio, stock, categoriaSeleccionada);
+        categoriaSeleccionada.agregarProducto(nombre);
+        electrodomesticos.add(electro);
+        JOptionPane.showMessageDialog(null, "---- Producto agregado ---");
+        System.out.println(categoriaSeleccionada.toString());
+        System.out.println(categoriaSeleccionada.getNombre());
     }
     
-  
-
-    Categoria categoriaSeleccionada = categorias.get(opcion - 1);
-    Electrodomestico electro = new Electrodomestico( nombre, precio, stock,categoriaSeleccionada);
-    categoriaSeleccionada.agregarProducto(nombre);
-    electrodomesticos.add(electro);
-    JOptionPane.showMessageDialog(null, "---- Producto agregado ---");
-    System.out.println(categoriaSeleccionada.toString());
-    System.out.println(categoriaSeleccionada.getNombre());
-}
-{
-
-
-
-
+    
+   public void listarElectrodomestico(){
        
-     
+       if (electrodomesticos.isEmpty()) {
+           JOptionPane.showMessageDialog(null,"no hay electrodomesticos que mostrar");
+           return;
+           
+       }
+       
+        StringBuilder lista = new StringBuilder("Lista de Electrodomesticos:\n");
+        electrodomesticos.forEach((electro)->{
+            lista.append(electro.getDescription()).append("\n");
             
         
+        });
         
-   
+        JOptionPane.showMessageDialog(null, lista);
+        
        
-         
-        
-
-        
-        
-        
-        
-
-    }
+       
+       
+   
+   }
 
     public boolean existeProductoElectro(String nombre) {
         // recorremos el array de alimentos 
@@ -427,18 +421,5 @@ public void agregarElectrodomestico() {
         return false;
 
     }
-    
-   
-   
-    
-    
-    
-    
-    
-
-
-    
-
-
 
 }
