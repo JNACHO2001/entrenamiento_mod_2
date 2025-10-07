@@ -299,8 +299,8 @@ public class Tienda {
                     case 3 ->
                         editarElectrodomestico();
 
-                    case 4 -> {
-                    }
+                    case 4 ->
+                        eliminarElectrodomestico();
 
                     default ->
                         JOptionPane.showMessageDialog(null, "opcion invalida");
@@ -445,6 +445,37 @@ public class Tienda {
                 JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
 
             }
+
+        }
+
+    }
+
+    public void eliminarElectrodomestico() {
+
+        if (electrodomesticos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "--no hay nada que eliminar");
+            return;
+
+        }
+        String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a eliminar--");
+        // variable de control
+        boolean encontrado = false;
+
+        for (int i = 0; i < electrodomesticos.size(); i++) {
+            Producto electro = electrodomesticos.get(i);
+
+            if (electro.getNombre().equalsIgnoreCase(nombre)) {
+                encontrado = true;
+                electrodomesticos.remove(i);
+                JOptionPane.showMessageDialog(null, "--Producto eliminado--");
+
+            }
+            break;
+
+        }
+
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "Producto no encontrado");
 
         }
 
