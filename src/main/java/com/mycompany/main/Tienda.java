@@ -294,14 +294,16 @@ public class Tienda {
                         agregarElectrodomestico();
 
                     case 2 ->
-                       listarElectrodomestico();
-                       
-                       
-                    case 3 -> {
+                        listarElectrodomestico();
+
+                    case 3 ->
+                        editarElectrodomestico();
+
+                    case 4 -> {
                     }
 
                     default ->
-                    JOptionPane.showMessageDialog(null, "opcion invalida");
+                        JOptionPane.showMessageDialog(null, "opcion invalida");
                 }
 
             } catch (Exception e) {
@@ -389,8 +391,8 @@ public class Tienda {
         System.out.println(electro.getDescription());
         System.out.println(categoriaSeleccionada.getNombre());
     }
-    
-       public void listarElectrodomestico() {
+
+    public void listarElectrodomestico() {
 
         if (electrodomesticos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "no hay electrodomesticos que mostrar");
@@ -406,11 +408,47 @@ public class Tienda {
 
         JOptionPane.showMessageDialog(null, lista);
 
+    }
 
-       
-       
-   
-   }
+    public void editarElectrodomestico() {
+        if (electrodomesticos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "--NO hay Electrodomestico para editar--");
+            return;
+
+        }
+
+        String nombre = JOptionPane.showInputDialog(this, "--Ingresa el producto a editar--");
+        boolean encontrado = false;
+        for (Producto electro : electrodomesticos) {
+            if (electro.getNombre().equalsIgnoreCase(nombre)) {
+                encontrado = true;
+                try {
+
+                    String precioInput = JOptionPane.showInputDialog(this, "--Ingresa el nuevo precio--");
+                    String cantidadInput = JOptionPane.showInputDialog(this, "--Ingresa la nueva cantidad--");
+                    // parseamos todo
+                    double nuevoPrecio = Double.parseDouble(precioInput);
+                    int nuevaCantidad = Integer.parseInt(cantidadInput);
+
+                    electro.setPrecio(nuevoPrecio);
+                    electro.setStock(nuevaCantidad);
+                    JOptionPane.showMessageDialog(null, "--Producto actualizado--");
+
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "--Error: Debes ingresar numeros validos--");
+                }
+                break;
+
+            }
+
+            if (!encontrado) {
+                JOptionPane.showMessageDialog(null, "--Producto no encontrado--");
+
+            }
+
+        }
+
+    }
 
     public boolean existeProductoElectro(String nombre) {
         // recorremos el array de alimentos 
