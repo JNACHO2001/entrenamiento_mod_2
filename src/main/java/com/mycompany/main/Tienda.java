@@ -55,7 +55,7 @@ public class Tienda {
     // retornamos  el menu para llamar en otro lado el methodo
     public String menu() {
         String menu = """
-                         ---- Menu Alimentos---
+                         ---- Menu ---
                          1. Agregar 
                          2. Listar
                          3. Editar 
@@ -293,8 +293,15 @@ public class Tienda {
                     case 1 ->
                         agregarElectrodomestico();
 
+                    case 2 ->
+                       listarElectrodomestico();
+                       
+                       
+                    case 3 -> {
+                    }
+
                     default ->
-                        throw new AssertionError();
+                    JOptionPane.showMessageDialog(null, "opcion invalida");
                 }
 
             } catch (Exception e) {
@@ -379,29 +386,27 @@ public class Tienda {
         categoriaSeleccionada.agregarProducto(nombre);
         electrodomesticos.add(electro);
         JOptionPane.showMessageDialog(null, "---- Producto agregado ---");
-        System.out.println(categoriaSeleccionada.toString());
+        System.out.println(electro.getDescription());
         System.out.println(categoriaSeleccionada.getNombre());
     }
     
-    
-   public void listarElectrodomestico(){
-       
-       if (electrodomesticos.isEmpty()) {
-           JOptionPane.showMessageDialog(null,"no hay electrodomesticos que mostrar");
-           return;
-           
-       }
-       
+       public void listarElectrodomestico() {
+
+        if (electrodomesticos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "no hay electrodomesticos que mostrar");
+            return;
+
+        }
+
         StringBuilder lista = new StringBuilder("Lista de Electrodomesticos:\n");
-        electrodomesticos.forEach((electro)->{
+        electrodomesticos.forEach((electro) -> {
             lista.append(electro.getDescription()).append("\n");
-            
-        
+
         });
-        
+
         JOptionPane.showMessageDialog(null, lista);
-        
-       
+
+
        
        
    
