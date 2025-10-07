@@ -9,9 +9,9 @@ public class Electrodomestico extends Producto {
         super(nombre, precio, stock);
         this.categoria = categoriaSeleccionada;
     }
+    
+     
 
-  
-   
 
     // Getter para categoría
     public Categoria getCategoria() {
